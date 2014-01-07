@@ -14,10 +14,9 @@
 Facter.add("sysupdate_count", :timeout => 30) do
   confine :osfamily => :redhat 
   setcode do
-    count = nil
-    output = Facter::Util::Resolution.exec('yum -q check-update')
+    count = 0
+    output = Facter::Util::Resolution.exec('yum -q check-update 2>/dev/null')
     if not output.nil?
-      count = 0
       output.each_line { |line|
         break if line =~ /^Obsolet/i
         count+=1 if line =~ /^\w/
