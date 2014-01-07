@@ -1,5 +1,5 @@
 class sysupdate::params {
-  $enabled = false
+  $enabled = true
   $period  = daily
   $range   = '8-18'
 
