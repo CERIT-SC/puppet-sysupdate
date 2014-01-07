@@ -8,7 +8,7 @@ class sysupdate::params {
     redhat,centos,scientific,oraclelinux,fedora: {
       $packages    = []
       $command     = 'yum -y update'
-      $environment = []
+      $environment = undef
     }
 
     debian,ubuntu: {
@@ -20,7 +20,7 @@ class sysupdate::params {
     sles,sled: {
       $packages    = []
       $command     = 'zypper --non-interactive update'
-      $environment = []
+      $environment = undef
     }
 
     default: {

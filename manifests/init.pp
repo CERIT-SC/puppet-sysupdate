@@ -8,7 +8,7 @@ class sysupdate (
 ) inherits sysupdate::params {
 
   validate_bool($enabled, $on_reboot)
-  validate_array($packages, $environment)
+  validate_array($packages)
   validate_string($command)
 
   Exec {
