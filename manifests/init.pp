@@ -34,5 +34,8 @@ class sysupdate (
       environment => $environment,
       schedule    => 'sysupdate',
     }
+
+  } else {
+    warning("sysupdate: Automatic system updates are disabled on ${::fqdn}!")
   }
 }
