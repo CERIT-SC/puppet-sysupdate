@@ -1,0 +1,3 @@
+class { 'sysupdate':
+  enabled => false,
+}
