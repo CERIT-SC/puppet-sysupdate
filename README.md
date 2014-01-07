@@ -26,11 +26,12 @@ Full configuration options:
 
 ```puppet
 class { 'sysupdate':
-  enabled  => false|true,                        # enable automatic updates
-  packages => array,                             # packages override
-  command  => '...',                             # update command override
-  period   => hourly|daily|weekly|monthly|never, # schedule period
-  range    => '...',                             # schedule range
+  enabled   => false|true,                        # enable automatic updates
+  on_reboot => false|true,                        # enable updates on reboot
+  packages  => array,                             # packages override
+  command   => '...',                             # update command override
+  period    => hourly|daily|weekly|monthly|never, # schedule period
+  range     => '...',                             # schedule range
 }
 ```
 

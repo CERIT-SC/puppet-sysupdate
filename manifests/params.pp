@@ -1,7 +1,8 @@
 class sysupdate::params {
-  $enabled = true
-  $period  = daily
-  $range   = '8-18'
+  $enabled   = true
+  $on_reboot = true
+  $period    = daily
+  $range     = '8-18'
 
   case $::operatingsystem {
     redhat,centos,scientific,oraclelinux,fedora: {
