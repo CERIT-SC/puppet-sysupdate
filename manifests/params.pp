@@ -1,6 +1,7 @@
 class sysupdate::params {
   $enabled   = true
   $on_reboot = true
+  $force     = false
   $period    = daily
   $range     = '8-18'
 

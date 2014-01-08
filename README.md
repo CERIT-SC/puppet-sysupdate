@@ -28,6 +28,7 @@ Full configuration options:
 class { 'sysupdate':
   enabled   => false|true,                        # enable automatic updates
   on_reboot => false|true,                        # enable updates on reboot
+  force     => false|true,                        # force run update regularly
   packages  => array,                             # packages override
   command   => '...',                             # update command override
   period    => hourly|daily|weekly|monthly|never, # schedule period

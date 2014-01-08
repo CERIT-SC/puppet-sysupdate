@@ -1,13 +1,14 @@
 class sysupdate (
   $enabled   = $sysupdate::params::enabled,
   $on_reboot = $sysupdate::params::on_reboot,
+  $force     = $sysupdate::params::force,
   $packages  = $sysupdate::params::packages,
   $command   = $sysupdate::params::command,
   $period    = $sysupdate::params::period,
   $range     = $sysupdate::params::range,
 ) inherits sysupdate::params {
 
-  validate_bool($enabled, $on_reboot)
+  validate_bool($enabled, $on_reboot, $force)
   validate_array($packages)
   validate_string($command)
 
@@ -34,10 +35,12 @@ class sysupdate (
       }
     }
 
-    exec { 'sysupdate':
-      command     => $command,
-      environment => $environment,
-      schedule    => 'sysupdate',
+    if $force or ($::sysupdate_count>0) {
+      exec { 'sysupdate':
+        command     => $command,
+        environment => $environment,
+        schedule    => 'sysupdate',
+      }
     }
 
   } else {
