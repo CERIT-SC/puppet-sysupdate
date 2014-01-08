@@ -28,14 +28,18 @@ class sysupdate (
       range  => $range,
     }
 
-    if size($packages)>0 {
-      package { $packages:
-        ensure => present,
-        before => Exec['sysupdate'],
+    # run update:
+    # 1. if forced or
+    # 2. pending updates is unknown or
+    # 3. have any pending updates
+    if $force or ! is_integer($::sysupdate_count) or ($::sysupdate_count>0) {
+      if size($packages)>0 {
+        package { $packages:
+          ensure => present,
+          before => Exec['sysupdate'],
+        }
       }
-    }
 
-    if $force or ($::sysupdate_count>0) {
       exec { 'sysupdate':
         command     => $command,
         environment => $environment,
