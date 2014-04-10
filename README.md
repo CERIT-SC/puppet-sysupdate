@@ -33,6 +33,7 @@ class { 'sysupdate':
   command   => '...',                             # update command override
   period    => hourly|daily|weekly|monthly|never, # schedule period
   range     => '...',                             # schedule range
+  timeout   => 300,                               # update command timeout
 }
 ```
 

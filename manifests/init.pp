@@ -6,16 +6,12 @@ class sysupdate (
   $command   = $sysupdate::params::command,
   $period    = $sysupdate::params::period,
   $range     = $sysupdate::params::range,
+  $timeout   = $sysupdate::params::timeout
 ) inherits sysupdate::params {
 
   validate_bool($enabled, $on_reboot, $force)
   validate_array($packages)
   validate_string($command)
-
-  Exec {
-    logoutput => true,
-    path      => '/bin:/usr/bin:/sbin:/usr/sbin'
-  }
 
   if $enabled {
     $_ensure_cron = $on_reboot ? {
@@ -42,8 +38,11 @@ class sysupdate (
 
       exec { 'sysupdate':
         command     => $command,
+        logoutput   => true,
+        path        => '/bin:/usr/bin:/sbin:/usr/sbin',
         environment => $environment,
         schedule    => 'sysupdate',
+        timeout     => $timeout,
       }
     }
 
