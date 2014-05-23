@@ -47,6 +47,7 @@ Facter.add("sysupdate_count", :timeout => 120) do
     count = nil
     output = Facter::Util::Resolution.exec('zypper --xmlout --quiet list-updates')
     if not output.nil?
+      require 'rexml/document'
       xml = REXML::Document.new(output)
       count = 0
       xml.elements.each('update-list/update') do |e|
