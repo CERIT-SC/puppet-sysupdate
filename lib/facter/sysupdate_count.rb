@@ -50,8 +50,8 @@ Facter.add("sysupdate_count", :timeout => 120) do
       require 'rexml/document'
       xml = REXML::Document.new(output)
       count = 0
-      xml.elements.each('update-list/update') do |e|
-        count +=1 if e.attribute('kind') == 'package'
+      xml.elements.each('stream/update-status/update-list/update') do |e|
+        count +=1 if e.attribute('kind').to_s == 'package'
       end
     end     
     count
