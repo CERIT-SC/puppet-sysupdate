@@ -2,6 +2,7 @@ class sysupdate::params {
   $enabled = true
   $on_reboot = true
   $force = false
+  $schedule = 'sysupdate'
   $period = daily
   $range = '8-18'
   $timeout = 300

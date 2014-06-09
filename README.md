@@ -31,6 +31,7 @@ class { 'sysupdate':
   force     => false|true,                        # force run update regularly
   packages  => array,                             # packages override
   command   => '...',                             # update command override
+  schedule  => 'sysupdate',                       # override exec's schedule name
   period    => hourly|daily|weekly|monthly|never, # schedule period
   range     => '...',                             # schedule range
   timeout   => 300,                               # update command timeout

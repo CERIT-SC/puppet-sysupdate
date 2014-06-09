@@ -4,6 +4,7 @@ class sysupdate (
   $force     = $sysupdate::params::force,
   $packages  = $sysupdate::params::packages,
   $command   = $sysupdate::params::command,
+  $schedule  = $sysupdate::params::sysupdate,
   $period    = $sysupdate::params::period,
   $range     = $sysupdate::params::range,
   $timeout   = $sysupdate::params::timeout
@@ -41,7 +42,7 @@ class sysupdate (
         logoutput   => true,
         path        => '/bin:/usr/bin:/sbin:/usr/sbin',
         environment => $environment,
-        schedule    => 'sysupdate',
+        schedule    => $schedule,
         timeout     => $timeout,
       }
     }
