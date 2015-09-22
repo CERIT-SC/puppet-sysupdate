@@ -14,8 +14,18 @@ class sysupdate::params {
       $environment = undef
     }
 
-    debian,ubuntu: {
-      $packages = ['update-notifier-common']
+    debian: {
+      case $::operatingsystemmajrelease {
+        6,7:      { $packages = ['update-notifier-common'] }
+        default:  { $packages = [] }
+      }
+
+      $command = 'apt-get -qq update && apt-get -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" upgrade'
+      $environment = ['DEBIAN_FRONTEND=noninteractive']
+    }
+
+    ubuntu: {
+      $packages = []
       $command = 'apt-get -qq update && apt-get -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" upgrade'
       $environment = ['DEBIAN_FRONTEND=noninteractive']
     }
