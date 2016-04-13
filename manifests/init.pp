@@ -1,18 +1,19 @@
 class sysupdate (
-  $enabled   = $sysupdate::params::enabled,
-  $on_reboot = $sysupdate::params::on_reboot,
-  $force     = $sysupdate::params::force,
-  $packages  = $sysupdate::params::packages,
-  $command   = $sysupdate::params::command,
-  $schedule  = $sysupdate::params::sysupdate,
-  $period    = $sysupdate::params::period,
-  $range     = $sysupdate::params::range,
-  $timeout   = $sysupdate::params::timeout
+  $enabled           = $sysupdate::params::enabled,
+  $on_reboot         = $sysupdate::params::on_reboot,
+  $force             = $sysupdate::params::force,
+  $packages          = $sysupdate::params::packages,
+  $command           = $sysupdate::params::command,
+  $command_on_reboot = $sysupdate::params::command,
+  $schedule          = $sysupdate::params::sysupdate,
+  $period            = $sysupdate::params::period,
+  $range             = $sysupdate::params::range,
+  $timeout           = $sysupdate::params::timeout
 ) inherits sysupdate::params {
 
   validate_bool($enabled, $on_reboot, $force)
   validate_array($packages)
-  validate_string($command)
+  validate_string($command, $command_on_reboot)
 
   if $enabled {
     $_ensure_cron = $on_reboot ? {
@@ -55,7 +56,7 @@ class sysupdate (
   cron { 'sysupdate-on-reboot':
     ensure      => $_ensure_cron,
     user        => root,
-    command     => $command,
+    command     => $command_on_reboot,
     environment => $environment,
     special     => 'reboot',
   }
