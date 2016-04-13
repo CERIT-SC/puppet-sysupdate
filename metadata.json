@@ -1,12 +1,15 @@
 {
   "name": "ceritsc-sysupdate",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "author": "ceritsc",
   "summary": "Automatic system updates via Puppet",
   "license": "MIT",
   "source": "https://github.com/CERIT-SC/puppet-sysupdate.git",
   "project_page": "https://github.com/CERIT-SC/puppet-sysupdate",
   "issues_url": "https://github.com/CERIT-SC/puppet-sysupdate/issues",
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":">= 4.0.0"}
+  ],
   "tags": [
     "sysupdate"
   ],
@@ -67,8 +70,5 @@
       "name": "puppet",
       "version_requirement": ">= 3.3.0 < 4.0.0"
     }
-  ],
-  "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 4.0.0"}
   ]
 }
