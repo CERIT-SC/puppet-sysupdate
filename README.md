@@ -26,15 +26,16 @@ Full configuration options:
 
 ```puppet
 class { 'sysupdate':
-  enabled   => false|true,                        # enable automatic updates
-  on_reboot => false|true,                        # enable updates on reboot
-  force     => false|true,                        # force run update regularly
-  packages  => array,                             # packages override
-  command   => '...',                             # update command override
-  schedule  => 'sysupdate',                       # override exec's schedule name
-  period    => hourly|daily|weekly|monthly|never, # schedule period
-  range     => '...',                             # schedule range
-  timeout   => 300,                               # update command timeout
+  enabled           => false|true,                        # enable automatic updates
+  on_reboot         => false|true,                        # enable updates on reboot
+  force             => false|true,                        # force run update regularly
+  packages          => array,                             # packages override
+  command           => '...',                             # update command override
+  command_on_reboot => '...',                             # update command on reboot
+  schedule          => 'sysupdate',                       # override exec's schedule name
+  period            => hourly|daily|weekly|monthly|never, # schedule period
+  range             => '...',                             # schedule range
+  timeout           => 300,                               # update command timeout
 }
 ```
 
