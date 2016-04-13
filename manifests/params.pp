@@ -10,7 +10,7 @@ class sysupdate::params {
   case $::operatingsystem {
     redhat,centos,scientific,oraclelinux,fedora: {
       $packages = []
-      $command = 'yum -y update'
+      $command = 'yum -y update --skip-broken'
       $environment = undef
     }
 
