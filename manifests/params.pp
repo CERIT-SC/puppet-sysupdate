@@ -8,29 +8,30 @@ class sysupdate::params {
   $timeout = 300
 
   case $::operatingsystem {
-    redhat,centos,scientific,oraclelinux,fedora: {
+    'RedHat','CentOS','Scientific','OracleLinux','Fedora': {
       $packages = []
       $command = 'yum -y update --skip-broken'
       $environment = undef
     }
 
-    debian: {
-      case $::operatingsystemmajrelease {
-        6,7:      { $packages = ['update-notifier-common'] }
-        default:  { $packages = [] }
+    'Debian': {
+      $packages = $::operatingsystemmajrelease ? {
+        '6'     => ['update-notifier-common'],
+        '7'     => ['update-notifier-common'],
+        default => []
       }
 
       $command = 'apt-get -qq update && apt-get -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" upgrade'
       $environment = ['DEBIAN_FRONTEND=noninteractive']
     }
 
-    ubuntu: {
+    'Ubuntu': {
       $packages = []
       $command = 'apt-get -qq update && apt-get -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" upgrade'
       $environment = ['DEBIAN_FRONTEND=noninteractive']
     }
 
-    sles,sled: {
+    'SLES','SLED': {
       $packages = []
       $command = 'zypper --non-interactive update'
       $environment = undef

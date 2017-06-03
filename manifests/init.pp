@@ -30,7 +30,7 @@ class sysupdate (
     # 1. if forced or
     # 2. pending updates is unknown or
     # 3. have any pending updates
-    if $force or ! is_integer($::sysupdate_count) or ($::sysupdate_count>0) {
+    if $force or empty("${::sysupdate_count}") or ($::sysupdate_count>0) {
       if size($packages)>0 {
         package { $packages:
           ensure => present,
