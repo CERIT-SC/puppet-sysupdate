@@ -12,16 +12,19 @@
 #
 
 Facter.add("sysupdate_count", :timeout => 30) do
-  confine :osfamily => :redhat 
+  confine :osfamily => :redhat
   setcode do
-    count = 0
+    count = nil
+
     output = Facter::Util::Resolution.exec('yum -q check-update 2>/dev/null')
     if not output.nil?
+      count = 0
       output.each_line { |line|
         break if line =~ /^Obsolet/i
-        count+=1 if line =~ /^\w/
+        count +=1 if line =~ /^\w/
       }
     end
+
     count
   end
 end
@@ -31,13 +34,15 @@ Facter.add("sysupdate_count", :timeout => 30) do
 
   setcode do
     count = nil
+
     if output = Facter::Util::Resolution.exec('apt-get -s upgrade')
       if output =~ /^(\d+) upgraded,/
-        count = $1
+        count = $1.to_i
       end
-    end     
+    end
+
     count
-  end 
+  end
 end
 
 Facter.add("sysupdate_count", :timeout => 120) do
@@ -45,6 +50,7 @@ Facter.add("sysupdate_count", :timeout => 120) do
 
   setcode do
     count = nil
+
     output = Facter::Util::Resolution.exec('zypper --xmlout --quiet list-updates')
     if not output.nil?
       require 'rexml/document'
@@ -53,7 +59,8 @@ Facter.add("sysupdate_count", :timeout => 120) do
       xml.elements.each('stream/update-status/update-list/update') do |e|
         count +=1 if e.attribute('kind').to_s == 'package'
       end
-    end     
+    end
+
     count
-  end 
+  end
 end

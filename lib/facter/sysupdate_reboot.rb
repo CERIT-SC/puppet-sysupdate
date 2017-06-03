@@ -12,9 +12,9 @@ Facter.add("sysupdate_reboot") do
 
   setcode do
     if File.exist?('/var/run/reboot-required')
-      "true"
+      true
     else
-      "false"
+      false
     end
-  end 
+  end
 end
