@@ -11,7 +11,7 @@
 # Caveats:
 #
 
-Facter.add("sysupdate_count", :timeout => 30) do
+Facter.add("sysupdate_count") do
   confine :osfamily => :redhat
   setcode do
     count = nil
@@ -29,7 +29,7 @@ Facter.add("sysupdate_count", :timeout => 30) do
   end
 end
 
-Facter.add("sysupdate_count", :timeout => 30) do
+Facter.add("sysupdate_count") do
   confine :osfamily => :debian
 
   setcode do
@@ -45,7 +45,7 @@ Facter.add("sysupdate_count", :timeout => 30) do
   end
 end
 
-Facter.add("sysupdate_count", :timeout => 120) do
+Facter.add("sysupdate_count") do
   confine :osfamily => :suse
 
   setcode do

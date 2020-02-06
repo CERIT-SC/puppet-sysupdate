@@ -1,3 +1,11 @@
+## 2020-02-06 - Release 0.9.3
+
+Update for Puppet 6
+
+#### Fixes
+
+- remove deprecated timeout option
+
 ## 2017-06-03 - Release 0.9.2
 
 Update for Puppet 4
